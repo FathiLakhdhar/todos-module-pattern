@@ -28,8 +28,10 @@ var app = {};
     (function todoModule(exports){
 
         const storage = supportsLocalStorage? localStorageProvider : cookieProvider;
-        var items = storage.getItem('todos');
+        var items = [];
 
+        (function Init(){LoadItems();})();
+        function LoadItems(){items = storage.getItem('todos');}
         function getItems(){return [].slice.call(items, 0)}
         function add(text){items.push({id: uuidv4(), text});}
         function save(){storage.save('todos' ,items)}
@@ -42,6 +44,7 @@ var app = {};
             add,
             del,
             save,
+            refresh : LoadItems
         }
         exports['todo'] = api;
     })(
