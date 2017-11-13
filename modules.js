@@ -31,7 +31,7 @@ var app = {};
         var items = storage.getItem('todos');
 
         function getItems(){return [].slice.call(items, 0)}
-        function add(text){items.push({id: items.length, text});}
+        function add(text){items.push({id: uuidv4(), text});}
         function save(){storage.save('todos' ,items)}
         
         var api = {
