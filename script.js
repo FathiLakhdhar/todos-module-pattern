@@ -10,10 +10,15 @@
     
     btnsave.onclick = () => app.todo.save(); 
 
+    ul.onclick = (e) => {
+        console.log(e.target.attributes.key.value);
+        app.todo.del(e.target.attributes.key.value);
+        render();
+    };
     
     function render(){
         var lis=[];
-        app.todo.getItems().forEach((item)=> lis+=`<li>${item.text}</li>`);
+        app.todo.getItems().forEach((item)=> lis+=`<li key=${item.id}>${item.text}</li>`);
         ul.innerHTML = lis;
     };
 

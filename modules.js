@@ -33,10 +33,14 @@ var app = {};
         function getItems(){return [].slice.call(items, 0)}
         function add(text){items.push({id: uuidv4(), text});}
         function save(){storage.save('todos' ,items)}
-        
+        function del(id){
+            let index = items.findIndex((e, i)=> e.id === id)
+            items.splice(index, 1);
+        }
         var api = {
             getItems,
             add,
+            del,
             save,
         }
         exports['todo'] = api;
